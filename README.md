@@ -1,2 +1,4 @@
-# PropMan.VSIX
-Proerty Manipulation Utilities for encapsulating fields, converting auto-properties to full properties and back.
+# PropMap-2017
+Property Manipulation Utilities for encapsulating fields, converting auto-properties to full properties and back.
+
+This is a source code and defect tracking repository only. For all binaries please visit the product [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=OlegShilo.PropMan-2017) page.
