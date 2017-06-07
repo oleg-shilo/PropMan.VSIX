@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="PropMan.2017.PropMan7c64986f-f4d6-4983-a49a-518d5512b212" Version="1.0.6" Language="en-US" Publisher="Oleg Shilo" />
+    <Identity Id="7c64986f-f4d6-4983-a49a-518d5512b212" Version="1.0.6" Language="en-US" Publisher="Oleg Shilo" />
     <DisplayName>PropMan - VS2017</DisplayName>
     <Description xml:space="preserve">Property Manipulation Utilities for encapsulating fields, converting auto-properties to full properties and back. </Description>
     <MoreInfo>http://visualstudiogallery.msdn.microsoft.com/64c1ba9d-42fb-4f0a-9c81-1e730a6df0b1</MoreInfo>
