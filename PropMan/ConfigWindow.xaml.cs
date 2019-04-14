@@ -6,7 +6,7 @@ namespace OlegShilo.PropMan
     /// <summary>
     /// Interaction logic for ConfigWindow.xaml
     /// </summary>
-    public partial class ConfigWindow : Window
+    public partial class ConfigWindow : UserControl
     {
         public ConfigWindow()
         {
@@ -22,18 +22,22 @@ namespace OlegShilo.PropMan
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             CSharpRefactor.FullPropTemplate = TemplateData.Text;
-            Close();
+            // Close();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            // Close();
         }
 
         private void TemplateData_TextChanged(object sender, TextChangedEventArgs e)
         {
             Save.IsEnabled = (CSharpRefactor.FullPropTemplate != TemplateData.Text);
             Reset.IsEnabled = (CSharpRefactor.FullPropTemplate != TemplateData.Text);
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
         }
     }
 }
