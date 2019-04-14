@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Editor;
@@ -7,7 +8,6 @@ using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.TextManager.Interop;
-using System.Collections.Generic;
 
 namespace OlegShilo.PropMan
 {
@@ -71,7 +71,7 @@ namespace OlegShilo.PropMan
                 if (info.IsAuto)
                 {
                     newCaretLineOffset = 2; //FullProperty has extra two lines (field declaration)
-                    //on top of the property definition 
+                    //on top of the property definition
                     replacementCode = refactor.EmittFullProperty(info);
                 }
                 else if (!info.IsAuto)
@@ -100,7 +100,6 @@ namespace OlegShilo.PropMan
                 ITextSnapshotLine currentLine = snapshot.GetLineFromLineNumber(i);
                 edit.Delete(currentLine.Start.Position, currentLine.LengthIncludingLineBreak);
             }
-
 
             var fieldLinesToDelete = new List<int>();
             var initialValue = "";
@@ -143,7 +142,6 @@ namespace OlegShilo.PropMan
             SnapshotPoint point = new SnapshotPoint(line.Snapshot, line.Start.Position + initialCaretXPosition);
             textView.Caret.MoveTo(point);
 
-
             if (fieldLinesToDelete.Any())
             {
                 ITextEdit edit1 = snapshot.TextBuffer.CreateEdit();
@@ -181,7 +179,7 @@ namespace OlegShilo.PropMan
             object holder;
             Guid guidViewHost = DefGuidList.guidIWpfTextViewHost;
             GetUserData().GetData(ref guidViewHost, out holder);
-            return (IWpfTextViewHost) holder;
+            return (IWpfTextViewHost)holder;
         }
 
         private IVsUserData GetUserData()
