@@ -1,19 +1,10 @@
 ﻿using System;
-using System.ComponentModel.Design;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio;
-using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.Win32;
 using Task = System.Threading.Tasks.Task;
 
-namespace OlegShilo.PropMan
+namespace PropMan
 {
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
@@ -33,28 +24,15 @@ namespace OlegShilo.PropMan
     /// </para>
     /// </remarks>
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
-    [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)] // Info on this package for Help/About
-    [ProvideMenuResource("Menus.ctmenu", 1)]
-    [ProvideToolWindow(typeof(MyToolWindow))]
     [Guid(PropManPackage.PackageGuidString)]
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
+    [ProvideMenuResource("Menus.ctmenu", 1)]
+    [ProvideToolWindow(typeof(ConfigToolWindow))]
     public sealed class PropManPackage : AsyncPackage
     {
         /// <summary>
-        /// ToolWindow1Package GUID string.
+        /// PropManPackage GUID string.
         /// </summary>
-        public const string PackageGuidString = "b3b5866b-b6e7-40d7-8400-7813bee7490c";
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PropManPackage"/> class.
-        /// </summary>
-        public PropManPackage()
-        {
-            // Inside this method you can place any initialization code that does not require
-            // any Visual Studio service because at this point the package object is created but
-            // not sited yet inside Visual Studio environment. The place to do all the other
-            // initialization is the Initialize method.
-        }
+        public const string PackageGuidString = "bc202133-5870-46b6-9caa-7e0d999deab3";
 
         #region Package Members
 
@@ -71,7 +49,8 @@ namespace OlegShilo.PropMan
             // Do any initialization that requires the UI thread after switching to the UI thread.
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             await PropManCommand.InitializeAsync(this);
-            await OlegShilo.PropMan.RefactorPropertyCommand.InitializeAsync(this);
+            await ConfigToolWindowCommand.InitializeAsync(this);
+            await PropertyRefactoringCommand.InitializeAsync(this);
         }
 
         #endregion Package Members

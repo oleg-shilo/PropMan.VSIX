@@ -8,9 +8,10 @@ using Microsoft.AutoPropertyConverterVSX;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TextManager.Interop;
+using OlegShilo.PropMan;
 using Task = System.Threading.Tasks.Task;
 
-namespace OlegShilo.PropMan
+namespace PropMan
 {
     /// <summary>
     /// Command handler
@@ -20,12 +21,12 @@ namespace OlegShilo.PropMan
         /// <summary>
         /// Command ID.
         /// </summary>
-        public const int CommandId = 256;
+        public const int CommandId = 4130;
 
         /// <summary>
         /// Command menu group (command set GUID).
         /// </summary>
-        public static readonly Guid CommandSet = new Guid("2566205f-f6ef-4a3e-8bd0-d0858a8737b8");
+        public static readonly Guid CommandSet = new Guid("9c37c135-e45b-4261-8564-d65de7787e07");
 
         /// <summary>
         /// VS Package that provides this command, not null.
@@ -78,7 +79,7 @@ namespace OlegShilo.PropMan
             // the UI thread.
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
 
-            OleMenuCommandService commandService = await package.GetServiceAsync((typeof(IMenuCommandService))) as OleMenuCommandService;
+            OleMenuCommandService commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
             Instance = new RefactorPropertyCommand(package, commandService);
         }
 
@@ -92,20 +93,6 @@ namespace OlegShilo.PropMan
         private void Execute(object sender, EventArgs e)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
-            // MenuItemCallback();
-
-            // string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
-            // string title = "RefactorPropertyCommand";
-
-            // // Show a message box to prove we were here
-            // VsShellUtilities.ShowMessageBox(
-            //     this.package,
-            //     message,
-            //     title,
-            //     OLEMSGICON.OLEMSGICON_INFO,
-            //     OLEMSGBUTTON.OLEMSGBUTTON_OK,
-            //     OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
-
             try
             {
                 var txtxMgr = (IVsTextManager)GetService<SVsTextManager>();
@@ -142,8 +129,6 @@ namespace OlegShilo.PropMan
         }
 
         object GetService<T>()
-        {
-            return this.ServiceProvider.GetServiceAsync(typeof(T))?.Result;
-        }
+        => this.ServiceProvider.GetServiceAsync(typeof(T))?.Result;
     }
 }
