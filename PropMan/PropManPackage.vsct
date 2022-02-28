@@ -87,7 +87,7 @@
 	</Commands>
 
 	<KeyBindings>
-		<KeyBinding guid="guidPropManPackageEditCmdSet" id="cmdidRefactorCommand" editor="guidVSStd97" key1="VK_OEM_2" mod1="Control" key2="VK_OEM_2" mod2="Control" />
+		<KeyBinding guid="guidPropManPackageEditCmdSet" id="cmdidRefactorCommand" editor="guidVSStd97" key1="VK_OEM_5" mod1="Control" key2="VK_OEM_5" mod2="Control" />
 	</KeyBindings>
 
 	<Symbols>

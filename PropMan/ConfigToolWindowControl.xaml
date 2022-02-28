@@ -7,7 +7,8 @@
     xmlns:vsshell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.15.0"
     Name="MyToolWindow"
     d:DesignHeight="300"
-    d:DesignWidth="300"
+    d:DesignWidth="400"
+    ClipToBounds="True"
     Background="{DynamicResource {x:Static vsshell:VsBrushes.WindowKey}}"
     Foreground="{DynamicResource {x:Static vsshell:VsBrushes.WindowTextKey}}"
     mc:Ignorable="d">

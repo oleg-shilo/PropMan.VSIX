@@ -87,6 +87,18 @@
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="licence.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Package.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="preview.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Resources\Command333.png" />
     <Content Include="Resources\ConfigToolWindowCommand.png" />
     <Content Include="Resources\PropManCommand.png" />
