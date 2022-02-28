@@ -62,10 +62,11 @@
 					<ButtonText>PropMan - Config</ButtonText>
 				</Strings>
 			</Button>
-			<Button guid="guidPropManPackageEditCmdSet" id="cmdidCommand333" priority="0x0100" type="Button">
+			<Button guid="guidPropManPackageEditCmdSet" id="cmdidRefactorCommand" priority="0x0100" type="Button">
 				<Parent guid="guidPropManPackageEditCmdSet" id="MyMenuGroup" />
 				<Icon guid="guidImages3" id="bmpPic1" />
 				<Strings>
+					k
 					<ButtonText>PropMan - Refactor Property</ButtonText>
 				</Strings>
 			</Button>
@@ -85,6 +86,10 @@
 		</Bitmaps>
 	</Commands>
 
+	<KeyBindings>
+		<KeyBinding guid="guidPropManPackageEditCmdSet" id="cmdidRefactorCommand" editor="guidVSStd97" key1="VK_OEM_2" mod1="Control" key2="VK_OEM_2" mod2="Control" />
+	</KeyBindings>
+
 	<Symbols>
 		<!-- This is the package guid. -->
 		<GuidSymbol name="guidPropManPackage" value="{bc202133-5870-46b6-9caa-7e0d999deab3}" />
@@ -100,7 +105,7 @@
 		<GuidSymbol value="{790c4103-d744-4766-bb6a-29a8d48c9317}" name="guidPropManPackageEditCmdSet">
 			<IDSymbol value="4128" name="MyMenuGroup" />
 			<IDSymbol value="4130" name="cmdidRefactorPropertyCommand" />
-			<IDSymbol value="256" name="cmdidCommand333" />
+			<IDSymbol value="256" name="cmdidRefactorCommand" />
 		</GuidSymbol>
 
 		<GuidSymbol name="guidImages" value="{30b65f10-0d32-4c42-ab09-050978ecfc37}">

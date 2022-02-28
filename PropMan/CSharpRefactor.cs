@@ -41,7 +41,8 @@ namespace OlegShilo.PropMan
             public string RootIndent = "    ";
 
             public string Name = "";
-            public string AccessModifiers = "";
+            public string AccessModifiersAndType = "";
+            public string Intitializer = "";
         }
 
         //an ugly state machine implementation
@@ -260,9 +261,20 @@ namespace OlegShilo.PropMan
                 string[] tokens = ToSingleLine(code).Split(' '); //ToSingleLine also removes any extra spaces
                 if (tokens.Last(0) == ";")
                 {
+                    // AccessModifiersAndType Name[=initializer];
                     retval.IsValid = true;
-                    retval.Name = tokens.Last(1);
-                    retval.AccessModifiers = tokens.ConcatItems(0, tokens.Length - 1 - 2, " ").TrimEnd();
+                    string[] declaration = tokens.TrimEnd(1).ToArray();
+
+                    if (tokens.Any(x => x == "="))
+                    {
+                        declaration = tokens.TakeWhile(x => x != "=").ToArray();
+                    }
+                    retval.Name = declaration.Last();
+                    retval.AccessModifiersAndType = string.Join(" ", declaration.TrimEnd(1)).TrimEnd();
+
+                    var initExpression = tokens.Skip(declaration.Length);
+                    if (initExpression.Any())
+                        retval.Intitializer = string.Join(" ", initExpression.TrimEnd(1).ToArray());
                 }
             }
             return retval;
@@ -273,7 +285,8 @@ namespace OlegShilo.PropMan
             var propInfo = new PropInfo()
             {
                 Name = fldInfo.Name[0].ToString().ToUpper() + fldInfo.Name.Substring(1),
-                AccessModifiers = "public " + fldInfo.AccessModifiers.Replace("private ", ""),
+                AccessModifiers = "public " + fldInfo.AccessModifiersAndType.Replace("private ", ""),
+                InitialValue = fldInfo.Intitializer,
                 RootIndent = fldInfo.RootIndent,
                 HasGetter = true,
                 HasSetter = true
@@ -297,7 +310,9 @@ public ${type} ${propName}
         ${fieldName} = value;
     }
 }";
+
         static string templateFile = Assembly.GetExecutingAssembly().Location + ".template";
+
         static public string FullPropTemplate
         {
             set
@@ -335,7 +350,6 @@ public ${type} ${propName}
             {
                 return EmittFullPropertyHardcoded(info);
             }
-
         }
 
         //when collapsing the full property the "field" line is not removed
@@ -372,7 +386,6 @@ public ${type} ${propName}
                                     .Replace("${propName}", info.Name)
                                     .Replace("${fieldName}", fieldName)
                                     .Replace(";;", ";"); //initValue may contain ';' as well as the template so remove duplicates
-
 
             foreach (string line in retval.Split(new string[] { "\r\n" }, StringSplitOptions.None))
                 AppendLine(0, line);
@@ -426,13 +439,13 @@ public ${type} ${propName}
             var code = new StringBuilder();
 
             Action<string> Append = (token) =>
-              {
-                  if (!string.IsNullOrEmpty(token))
-                  {
-                      code.Append(token);
-                      code.Append(" ");
-                  }
-              };
+                {
+                    if (!string.IsNullOrEmpty(token))
+                    {
+                        code.Append(token);
+                        code.Append(" ");
+                    }
+                };
 
             code.Append(info.RootIndent);
             Append(info.AccessModifiers.Replace("private", "public")
@@ -507,6 +520,11 @@ public ${type} ${propName}
         static public T Last<T>(this T[] collection, int index) where T : class
         {
             return collection[collection.Length - index - 1];
+        }
+
+        static public IEnumerable<T> TrimEnd<T>(this IEnumerable<T> collection, int count) where T : class
+        {
+            return collection.Take(collection.Count() - count).ToArray();
         }
 
         static public string ConcatItems(this string[] collection, int startIndex, int endIndex, string newDelimiter)

@@ -4,7 +4,7 @@
         Title="Window1"
         Loaded="Window_Loaded"
         SizeToContent="WidthAndHeight"
-        WindowStartupLocation="CenterOwner"
+        WindowStartupLocation="CenterScreen"
         WindowStyle="None">
     <Grid>
         <ListBox x:Name="ChoiceBox"
