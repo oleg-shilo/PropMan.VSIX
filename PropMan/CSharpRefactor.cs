@@ -311,7 +311,10 @@ public ${type} ${propName}
     }
 }";
 
-        static string templateFile = Assembly.GetExecutingAssembly().Location + ".template";
+        static string templateFile =
+                   Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                        "PropMan.VSIX",
+                        "PropMan.template");
 
         static public string FullPropTemplate
         {
@@ -319,6 +322,9 @@ public ${type} ${propName}
             {
                 try
                 {
+                    if (!Directory.Exists(Path.GetDirectoryName(templateFile)))
+                        Directory.CreateDirectory(Path.GetDirectoryName(templateFile));
+
                     File.WriteAllText(templateFile, value);
                 }
                 catch
